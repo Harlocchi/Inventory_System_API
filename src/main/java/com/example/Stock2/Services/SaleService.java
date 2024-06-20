@@ -1,16 +1,10 @@
 package com.example.Stock2.Services;
-
 import com.example.Stock2.Model.Product;
 import com.example.Stock2.Model.Sale;
 import com.example.Stock2.Repository.SaleRepository;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -34,20 +28,6 @@ public class SaleService {
             return false;
         }
     }
-
-    public String forString(List<Product> listProducts, List<String> quantyties){
-        String StringForReturn = null;
-
-        for(int i = 0; i < listProducts.size(); i++){
-            Product val = listProducts.get(i);
-            StringForReturn.concat(String.valueOf(val.getId()));
-            StringForReturn.concat("-");
-            StringForReturn.concat(String.valueOf(quantyties.get(i)));
-            StringForReturn.concat("|");
-        }
-        return StringForReturn;
-    }
-
 
     public String HashMapForString(HashMap<String, String> map){
 
@@ -89,6 +69,15 @@ public class SaleService {
         }
 
     }
+
+    public Sale findporId(Long Id) throws Exception {
+
+        return saleRepository.findById(Id).
+                orElseThrow(() -> new  Exception(""));
+
+    }
+
+
 
 
 

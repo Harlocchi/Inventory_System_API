@@ -1,6 +1,7 @@
 package com.example.Stock2.Services;
 
 import com.example.Stock2.Model.Client;
+import com.example.Stock2.Model.Product;
 import com.example.Stock2.Repository.ClientRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

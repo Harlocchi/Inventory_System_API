@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.mapping.Join;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -23,10 +24,11 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @ManyToOne
-    @JoinColumn(name = "Client_Id", nullable = false)
-    private Client client;
+    private String ClientName;
+
+    private String product;
+
+    private String quantidade;
 
 
-    private String products;
 }

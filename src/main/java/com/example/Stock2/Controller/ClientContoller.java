@@ -1,6 +1,7 @@
 package com.example.Stock2.Controller;
 
 import com.example.Stock2.Model.Client;
+import com.example.Stock2.Repository.ClientRepository;
 import com.example.Stock2.Services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,17 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Client")
+@CrossOrigin(origins = "*")
 public class ClientContoller {
 
     @Autowired
     ClientService clientService;
+    ClientRepository clientRepository;
 
     @GetMapping()
     public List<Client> findAll(){
         return clientService.findAll();
     }
 
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<Client> add(@RequestBody Client client){
         try {
             clientService.add(client);
@@ -41,15 +44,18 @@ public class ClientContoller {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<Client> Delete(@RequestBody Client client) throws Exception {
+    @PostMapping("/delete")
+    public boolean Delete(@RequestBody Client client) throws Exception {
+        System.out.println(client);
         try {
             clientService.Delete(client);
-            return ResponseEntity.status(HttpStatus.OK).body(client);
+            return true;
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(client);
+            return false;
         }
     }
+
+
 
     @GetMapping ("/{Id}")
     public Client find(@PathVariable Long Id) throws Exception {

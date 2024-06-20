@@ -10,8 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
+
+
 @RestController
-@RequestMapping("/Products")
+@RequestMapping("/Product")
+@CrossOrigin(origins = "*")
 public class ProductController {
 
 
@@ -20,10 +24,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping()
     public List<Product> findAll(){
        return productService.findAll();
     }
+
 
     @PostMapping()
     public ResponseEntity<Product> add(@RequestBody Product product){
@@ -31,23 +37,23 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
+
     @PutMapping()
     public Boolean update( @RequestBody Product product) throws Exception {
         return productService.update(product);
     }
 
-    @DeleteMapping()
+
+    @PostMapping("/delete ")
     public boolean delete(@RequestBody Product product){
+        System.out.println(product);
         return productService.Delete(product);
     }
+
 
 
     @GetMapping("/{Id}")
     public Product findById(@PathVariable Long Id) throws Exception {
         return productService.findPorId(Id);
     }
-
-
-
-
 }
